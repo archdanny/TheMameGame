@@ -8,7 +8,11 @@ package doolhof;
 
 import java.awt.Color;
 import java.awt.Graphics;
+import java.awt.Graphics2D;
 import java.awt.Image;
+import java.awt.geom.AffineTransform;
+import java.awt.image.AffineTransformOp;
+import java.awt.image.BufferedImage;
 import javax.swing.ImageIcon;
 
 /**
@@ -22,9 +26,10 @@ public class Speler extends Item
     public  int x;
     public  int y;
     Grid grid;
-    
     ImageIcon imageGet;
-     Image image;
+    Image image;
+    int boxSize = 30;
+     
     
     public Speler()
     {
@@ -38,9 +43,16 @@ public class Speler extends Item
         {
             
             super.paintComponent(g);
-             g.drawImage(image, 0, 0, 20, 20, null, this);
-                
-
+             g.drawImage(image, 0, 0, boxSize, boxSize, null, this);
+             
+//             AffineTransform identity = new AffineTransform();
+//             Graphics2D g2d = (Graphics2D)g;
+//            AffineTransform trans = new AffineTransform();
+//            trans.setTransform(identity);
+//            trans.rotate( 0 );
+//            g2d.scale(0.3, 0.3);
+//            g2d.drawImage(image, trans, this);
+//            
         }
      
      @Override
@@ -60,8 +72,8 @@ public class Speler extends Item
             
             this.huidigeVeld.y = huidigeVeld.y -1;
             
-            y = y -20;
-            setBounds(x, y , 20, 20);
+            y = y -boxSize;
+            setBounds(x, y , boxSize, boxSize);
             repaint(); 
          }
      }
@@ -77,8 +89,8 @@ public class Speler extends Item
 
             this.huidigeVeld.y = huidigeVeld.y +1;
             
-          y = y +20;
-          setBounds(x, y , 20, 20);
+          y = y + boxSize;
+          setBounds(x, y , boxSize, boxSize);
           repaint();
          }
           
@@ -93,8 +105,8 @@ public class Speler extends Item
             grid.gridVeld[huidigeVeld.y][checkX ].item = this;
              
             this.huidigeVeld.x = huidigeVeld.x -1;
-            x = x -20;
-            setBounds(x,y , 20, 20);
+            x = x - boxSize;
+            setBounds(x,y , boxSize, boxSize);
             repaint();   
          }
      }
@@ -108,8 +120,8 @@ public class Speler extends Item
             grid.gridVeld[huidigeVeld.y][checkX ].item = this;
             
              this.huidigeVeld.x = huidigeVeld.x +1;
-         x = x +20;
-        setBounds(x,y , 20, 20);
+         x = x + boxSize;
+        setBounds(x,y , boxSize, boxSize);
         repaint();   
          }
          

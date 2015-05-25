@@ -16,8 +16,8 @@ import javax.swing.JPanel;
  */
 public class Spel extends JFrame 
 {
-    private final int frameHoogte = 400;
-    private final int frameBreedte = 470;
+    private final int frameHoogte = 600;
+    private final int frameBreedte = 670;
     public Level level;
     
     public Spel()
@@ -32,9 +32,9 @@ public class Spel extends JFrame
     {
         level = new Level();
         add(level.spelstat);
-        level.spelstat.setBounds(0, 0, 400, 50);
+        level.spelstat.setBounds(0, 0, 600, 50);
         add(level.grid);
-        level.grid.setBounds(0, 50, 400, 400);
+        level.grid.setBounds(0, 50, 600, 600);
 
     }
            

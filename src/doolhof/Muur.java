@@ -21,6 +21,7 @@ public class Muur extends Item
      public Veld huidigeVeld;
      ImageIcon imageGet;
      Image image;
+     int boxSize = 30;
     
     public Muur()
     {
@@ -35,7 +36,7 @@ public class Muur extends Item
             super.paintComponent(g);
                //g.setColor(Color.red);
                 //g.fillRect(0, 0 , 100, 100); 
-                g.drawImage(image, 0, 0, 20, 20, Color.LIGHT_GRAY, this);
+                g.drawImage(image, 0, 0, boxSize, boxSize, Color.LIGHT_GRAY, this);
 
         }
 }

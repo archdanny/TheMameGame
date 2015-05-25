@@ -7,7 +7,17 @@
 package doolhof;
 
 import java.awt.Color;
+import java.io.BufferedReader;
+import java.io.File;
+import java.io.FileInputStream;
+import java.io.FileNotFoundException;
+import java.io.FileReader;
+import java.io.InputStreamReader;
+import java.net.URL;
+import java.util.ResourceBundle;
+import java.util.Scanner;
 import javax.swing.JPanel;
+import sun.security.util.Resources;
 
 /**
  *
@@ -15,8 +25,9 @@ import javax.swing.JPanel;
  */
 public class Grid extends JPanel
 {
-    private final int frameHoogte = 400;
-    private final int frameBreedte = 400;
+    private final int frameHoogte = 600;
+    private final int frameBreedte = 600;
+    private int boxSize = frameHoogte/20;
     private int rows = 20;
     private int colum = 20;
     public Veld gridVeld [][];
@@ -33,6 +44,7 @@ public class Grid extends JPanel
         setFocusable(true);
         requestFocus();
         requestFocusInWindow(true);
+        
     }
     
     
@@ -54,73 +66,67 @@ public class Grid extends JPanel
         
          public void readGrid()
         {
-            String w = "w";
-            String g = "g";
-            String s = "s";
-            
-            String [][] myArray = new String[][]{
-        {w, w, w, w, w, w, w, w, w, w, w, w, w, w, w, w, w, w, w, w},
-        {w, s, w, g, w, g, g, g, w, g, g, g, w, g, g, g, g, g, g, w},
-        {w, g, w, g, w, g, w, g, w, g, w, g, w, g, w, w, w, w, g, w},
-        {w, g, w, g, w, g, w, g, w, g, w, g, w, g, w, g, g, g, g, w},
-        {w, g, g, g, w, g, w, g, g, g, w, g, w, g, w, w, g, w, w, w},
-        {w, w, w, g, w, g, w, w, w, w, w, g, w, g, g, w, g, w, g, w},
-        {w, g, w, g, w, g, g, g, g, g, g, g, w, w, g, w, g, w, g, w},
-        {w, g, w, g, w, g, w, w, w, w, w, g, g, w, g, w, g, w, g, w},
-        {w, g, w, g, w, g, g, g, g, g, w, w, g, w, g, w, g, w, g, w},
-        {w, g, w, g, w, w, w, w, w, g, g, w, g, w, g, w, g, w, g, w},
-        {w, g, w, g, w, g, g, g, w, w, g, w, g, g, g, w, g, w, g, w},
-        {w, g, g, g, w, g, w, g, g, g, g, w, g, w, g, g, g, w, g, w},
-        {w, g, w, w, w, g, w, w, w, w, g, w, g, w, g, g, w, w, g, w},
-        {w, g, w, g, g, g, g, g, g, w, g, w, g, w, w, g, w, g, g, w},
-        {w, g, w, g, w, w, w, w, g, w, g, w, g, g, w, g, w, g, g, w},
-        {w, g, w, g, g, g, g, w, g, w, g, w, w, g, w, g, w, g, g, w},
-        {w, g, w, w, w, w, g, w, g, w, g, g, w, g, w, g, w, g, g, w},
-        {w, g, g, g, g, g, g, w, g, w, w, g, w, g, w, g, w, w, g, w},
-        {w, g, g, g, g, g, g, w, g, g, g, g, w, g, w, g, g, g, g, w},
-        {w, w, w, w, w, w, w, w, w, w, w, w, w, w, w, w, w, w, w, w}};
-            
+           String [] mapArray = new String[20];
+           File file;
+           FileInputStream fis;
+           
+            try {
+               
+               file = new File(getClass().getClassLoader().getResource("Levels/levelUno.txt").getFile());
+               fis = new FileInputStream(file);
+                
+                BufferedReader br = new BufferedReader(new InputStreamReader(fis));
+
+                for (int i = 0; i < 20; i++) 
+                {
+                      mapArray[i] = br.readLine();
+                }
+                
+            } catch (Exception e) {
+                System.out.println(e);
+            }
+ 
             
             int Xposition = 0;
-        int Yposition = 0;
+            int Yposition = 0;
         
         for (int i = 0; i < 20; i++) 
         {
             
             for (int j = 0; j < 20; j++) 
             {
-                if(myArray[i][j].equals("w"))
+                if(mapArray[i].substring(j, j+1).equals("w"))
                 {
                     Item m = new Muur();
                     gridVeld[i][j].item = m;
                     gridVeld[i][j].y = i;
                     gridVeld[i][j].x = j;
                     
-                    m.setBounds(Xposition, Yposition, 20, 20);
+                    m.setBounds(Xposition, Yposition, boxSize, boxSize);
                     add(m);
                 }
-                 if(myArray[i][j].equals("g"))
+                 if(mapArray[i].substring(j, j+1).equals("g"))
                 {
                     gridVeld[i][j].item = null;
                    
                 
                 }
-                 if(myArray[i][j].equals("s"))
+                 if(mapArray[i].substring(j, j+1).equals("s"))
                  {
                      
                      gridVeld[i][j].item = speler;
                      speler.x = Xposition;
                      speler.y = Yposition;
-                     speler.setBounds(speler.x, speler.y, 20, 20);
+                     speler.setBounds(speler.x, speler.y, boxSize, boxSize);
                       gridVeld[i][j].y = i;
                       gridVeld[i][j].x = j;
                      speler.huidigeVeld = gridVeld[i][j];
                      
                  }
 
-                Xposition = Xposition+20;
+                Xposition = Xposition+boxSize;
             }
-            Yposition = Yposition +20;
+            Yposition = Yposition +boxSize;
             Xposition = 0;
        }
        
