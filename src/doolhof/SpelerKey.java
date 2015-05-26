@@ -39,11 +39,15 @@ public class SpelerKey implements KeyListener {
                  speler.moveUp();
   
             }
+            if(e.getKeyCode() == KeyEvent.VK_SPACE)
+            {
+                speler.destroy();
+            }
             
             if(e.getKeyCode() == KeyEvent.VK_DOWN)
-             {
+                {
                 speler.moveDown();
-            }
+                }
                        
             if(e.getKeyCode() == KeyEvent.VK_LEFT)
              {

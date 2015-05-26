@@ -6,26 +6,30 @@
 
 package doolhof;
 
+import java.awt.Color;
 import java.awt.Graphics;
-import javax.swing.JComponent;
 
 /**
  *
  * @author Danny
  */
-public abstract class Item extends JComponent
-{
+public class explosion extends Item {
     
-    @Override
-     public void paintComponent(Graphics g) 
-        {
-            super.paintComponent(g);
-        }
-     
-    public void Draw(Graphics g)
+    public explosion()
     {
-    
+        
     }
     
+    
+     @Override
+     public void paintComponent(Graphics g) 
+        {
+            
+            super.paintComponent(g);
+               g.setColor(Color.red);
+                g.fillRect(0, 0 , 100, 100); 
+               
+
+        }
     
 }

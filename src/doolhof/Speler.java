@@ -6,6 +6,8 @@
 
 package doolhof;
 
+import doolhof.Beweeg.Direction;
+import static doolhof.Beweeg.Direction.*;
 import java.awt.Color;
 import java.awt.Graphics;
 import java.awt.Graphics2D;
@@ -19,7 +21,7 @@ import javax.swing.ImageIcon;
  *
  * @author Danny
  */
-public class Speler extends Item
+public class Speler extends Item implements Beweeg
 {
     public Veld huidigeVeld;
     SpelerKey keys;
@@ -29,13 +31,15 @@ public class Speler extends Item
     ImageIcon imageGet;
     Image image;
     int boxSize = 30;
-     
+     int rotation;
+     Direction direction;
     
     public Speler()
     {
         keys = new SpelerKey();
         imageGet = new  ImageIcon(getClass().getClassLoader().getResource("Images/player.png"));
         image = imageGet.getImage();
+        direction = Down;
     }
     
      @Override
@@ -43,16 +47,40 @@ public class Speler extends Item
         {
             
             super.paintComponent(g);
-             g.drawImage(image, 0, 0, boxSize, boxSize, null, this);
+             //g.drawImage(image, 0, 0, boxSize, boxSize, null, this);
+             int translateX =0;
+             int translateY =0;
              
-//             AffineTransform identity = new AffineTransform();
-//             Graphics2D g2d = (Graphics2D)g;
-//            AffineTransform trans = new AffineTransform();
-//            trans.setTransform(identity);
-//            trans.rotate( 0 );
-//            g2d.scale(0.3, 0.3);
-//            g2d.drawImage(image, trans, this);
-//            
+             if(direction == Up)
+             {
+                 rotation = 180;
+                translateX =30;
+                translateY =30;
+             }
+               if(direction == Left)
+             {
+                 rotation = 90;
+                translateX =30;
+                translateY =0;
+             }
+              if(direction == Right)
+             {
+                 rotation = 270;
+                translateX =0;
+                translateY =30;
+             }
+              if(direction == Down)
+             {
+                 rotation = 0;
+                translateX =0;
+                translateY =0;
+             }
+             
+            Graphics2D g2d=(Graphics2D)g; // Create a Java2D version of g.
+            g2d.translate(translateX, translateY); // Translate the center of our coordinates.
+            g2d.rotate(Math.toRadians(rotation));  // Rotate the image by 1 radian.
+            g2d.drawImage(image, 0, 0, boxSize, boxSize, null,this);
+           
         }
      
      @Override
@@ -74,8 +102,10 @@ public class Speler extends Item
             
             y = y -boxSize;
             setBounds(x, y , boxSize, boxSize);
-            repaint(); 
+            
          }
+         direction = Up;
+            repaint(); 
      }
      
      public void moveDown()
@@ -91,8 +121,10 @@ public class Speler extends Item
             
           y = y + boxSize;
           setBounds(x, y , boxSize, boxSize);
-          repaint();
+         
          }
+          direction = Down;
+          repaint();
           
      }
      public void moveLeft()
@@ -107,8 +139,10 @@ public class Speler extends Item
             this.huidigeVeld.x = huidigeVeld.x -1;
             x = x - boxSize;
             setBounds(x,y , boxSize, boxSize);
-            repaint();   
+              
          }
+         direction = Left;
+            repaint(); 
      }
      public void moveRight()
      {
@@ -122,8 +156,30 @@ public class Speler extends Item
              this.huidigeVeld.x = huidigeVeld.x +1;
          x = x + boxSize;
         setBounds(x,y , boxSize, boxSize);
-        repaint();   
+          
+         }
+        direction = Right;
+        repaint(); 
+     }
+     
+     public void destroy()
+     {
+         if(direction == Left) 
+         {
+             int checkX = huidigeVeld.x -1;
+             if(grid.gridVeld[huidigeVeld.y][checkX].item instanceof Muur)
+             {
+                 explosion ex = new explosion();
+                 //grid.gridVeld[huidigeVeld.y][checkX].item = ex;
+                 grid.gridVeld[huidigeVeld.y][checkX].item.setBounds(0, 0, 20, 20);
+                 grid.gridVeld[huidigeVeld.y][checkX].item.repaint();
+                 //grid.repaint();
+                 grid.gridVeld[huidigeVeld.y][checkX].item = null;
+             }
+             
          }
          
      }
+     
+     
 }

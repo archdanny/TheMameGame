@@ -52,18 +52,7 @@ public class SpelStat extends JPanel {
         @Override
         public void actionPerformed(ActionEvent e) 
         {
-//            level.grid.gridVeld[level.grid.speler.huidigeVeld.y][level.grid.speler.huidigeVeld.x].speler= null;
-//            level.grid.speler.x=20;
-//            level.grid.speler.y=20;
-//            level.grid.gridVeld[1][1].speler = level.grid.speler;
-//            level.grid.speler.huidigeVeld.x=1;
-//            level.grid.speler.huidigeVeld.y=1;
-//     
-//             level.grid.speler.setBounds(level.grid.speler.x,level.grid.speler.y, 20, 20);
-////                      gridVeld[i][j].y = i;
-////                        gridVeld[i][j].x = j;
-////                     speler.huidigeVeld = gridVeld[i][j];
-//              level.grid.requestFocus();
+
              level.grid.readGrid();
         }
  }

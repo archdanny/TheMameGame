@@ -48,6 +48,7 @@ public class Grid extends JPanel
     }
     
     
+    
         public void makeGrid()
     {
          gridVeld = new Veld[rows][colum];
