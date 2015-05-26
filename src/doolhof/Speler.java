@@ -27,7 +27,7 @@ public class Speler extends Item implements Beweeg
     SpelerKey keys;
     public  int x;
     public  int y;
-    Grid grid;
+    
     ImageIcon imageGet;
     Image image;
     int boxSize = 30;
@@ -92,16 +92,18 @@ public class Speler extends Item implements Beweeg
      public void moveUp()
      {
          int checkY = huidigeVeld.y -1;
-         boolean a = grid.gridVeld[checkY][huidigeVeld.x].item instanceof Muur;
+         boolean a = huidigeVeld.grid.gridVeld[checkY][huidigeVeld.x].item instanceof Muur;
          if(!a)
          {
-            grid.gridVeld[huidigeVeld.y][huidigeVeld.x].item= null;
-            grid.gridVeld[checkY][huidigeVeld.x ].item = this;
+             
+            huidigeVeld.grid.gridVeld[huidigeVeld.y][huidigeVeld.x].item= null;
+            huidigeVeld.grid.gridVeld[checkY][huidigeVeld.x ].item = this;
             
             this.huidigeVeld.y = huidigeVeld.y -1;
             
             y = y -boxSize;
             setBounds(x, y , boxSize, boxSize);
+            
             
          }
          direction = Up;
@@ -111,11 +113,11 @@ public class Speler extends Item implements Beweeg
      public void moveDown()
      {
          int checkY = huidigeVeld.y +1;
-         boolean a = grid.gridVeld[checkY][huidigeVeld.x].item instanceof Muur;
+         boolean a = huidigeVeld.grid.gridVeld[checkY][huidigeVeld.x].item instanceof Muur;
          if(!a)
          {
-            grid.gridVeld[huidigeVeld.y][huidigeVeld.x].item= null;
-            grid.gridVeld[checkY][huidigeVeld.x ].item = this;
+            huidigeVeld.grid.gridVeld[huidigeVeld.y][huidigeVeld.x].item= null;
+            huidigeVeld.grid.gridVeld[checkY][huidigeVeld.x ].item = this;
 
             this.huidigeVeld.y = huidigeVeld.y +1;
             
@@ -130,11 +132,11 @@ public class Speler extends Item implements Beweeg
      public void moveLeft()
      {
           int checkX = huidigeVeld.x -1;
-         boolean a = grid.gridVeld[huidigeVeld.y][checkX].item instanceof Muur;
+         boolean a = huidigeVeld.grid.gridVeld[huidigeVeld.y][checkX].item instanceof Muur;
          if(!a)
          {
-            grid.gridVeld[huidigeVeld.y][huidigeVeld.x].item= null;
-            grid.gridVeld[huidigeVeld.y][checkX ].item = this;
+            huidigeVeld.grid.gridVeld[huidigeVeld.y][huidigeVeld.x].item= null;
+            huidigeVeld.grid.gridVeld[huidigeVeld.y][checkX ].item = this;
              
             this.huidigeVeld.x = huidigeVeld.x -1;
             x = x - boxSize;
@@ -147,11 +149,11 @@ public class Speler extends Item implements Beweeg
      public void moveRight()
      {
           int checkX = huidigeVeld.x +1;
-         boolean a = grid.gridVeld[huidigeVeld.y][checkX].item instanceof Muur;
+         boolean a = huidigeVeld.grid.gridVeld[huidigeVeld.y][checkX].item instanceof Muur;
          if(!a)
          {
-            grid.gridVeld[huidigeVeld.y][huidigeVeld.x].item= null;
-            grid.gridVeld[huidigeVeld.y][checkX ].item = this;
+            huidigeVeld.grid.gridVeld[huidigeVeld.y][huidigeVeld.x].item= null;
+            huidigeVeld.grid.gridVeld[huidigeVeld.y][checkX ].item = this;
             
              this.huidigeVeld.x = huidigeVeld.x +1;
          x = x + boxSize;
@@ -162,23 +164,38 @@ public class Speler extends Item implements Beweeg
         repaint(); 
      }
      
-     public void destroy()
+     public void destroy(Direction d)
      {
-         if(direction == Left) 
+         if(d == Left) 
          {
              int checkX = huidigeVeld.x -1;
-             if(grid.gridVeld[huidigeVeld.y][checkX].item instanceof Muur)
+             if(huidigeVeld.grid.gridVeld[huidigeVeld.y][checkX].item instanceof Muur)
              {
-                 explosion ex = new explosion();
-                 //grid.gridVeld[huidigeVeld.y][checkX].item = ex;
-                 grid.gridVeld[huidigeVeld.y][checkX].item.setBounds(0, 0, 20, 20);
-                 grid.gridVeld[huidigeVeld.y][checkX].item.repaint();
-                 //grid.repaint();
-                 grid.gridVeld[huidigeVeld.y][checkX].item = null;
+                 Muur m = (Muur)huidigeVeld.grid.gridVeld[huidigeVeld.y][checkX].item;
+                 if(m.getBreekbaar() == true)
+                 {
+                 huidigeVeld.grid.gridVeld[huidigeVeld.y][checkX].item.setBounds(0, 0, 20, 20);
+                 huidigeVeld.grid.gridVeld[huidigeVeld.y][checkX].item.repaint();
+                 huidigeVeld.grid.gridVeld[huidigeVeld.y][checkX].item = null;
+                 }
              }
              
          }
-         
+         if(d == Right) 
+         {
+             int checkX = huidigeVeld.x +1;
+             if(huidigeVeld.grid.gridVeld[huidigeVeld.y][checkX].item instanceof Muur)
+             {
+                  Muur m = (Muur)huidigeVeld.grid.gridVeld[huidigeVeld.y][checkX].item;
+                 if(m.getBreekbaar() == true)
+                 {
+                 huidigeVeld.grid.gridVeld[huidigeVeld.y][checkX].item.setBounds(0, 0, 20, 20);
+                 huidigeVeld.grid.gridVeld[huidigeVeld.y][checkX].item.repaint();
+                 huidigeVeld.grid.gridVeld[huidigeVeld.y][checkX].item = null;
+                 }
+             }
+             
+         }
      }
      
      

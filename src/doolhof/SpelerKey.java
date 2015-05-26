@@ -34,15 +34,10 @@ public class SpelerKey implements KeyListener {
                 
             
             if(e.getKeyCode() == KeyEvent.VK_UP)
-             {
-                 
-                 speler.moveUp();
-  
-            }
-            if(e.getKeyCode() == KeyEvent.VK_SPACE)
             {
-                speler.destroy();
+                 speler.moveUp();
             }
+           
             
             if(e.getKeyCode() == KeyEvent.VK_DOWN)
                 {
@@ -57,6 +52,10 @@ public class SpelerKey implements KeyListener {
             if(e.getKeyCode() == KeyEvent.VK_RIGHT)
              {
                 speler.moveRight();
+            }
+             if(e.getKeyCode() == KeyEvent.VK_SPACE)
+            {
+                speler.destroy(speler.direction);
             }
            
         }

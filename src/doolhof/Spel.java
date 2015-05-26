@@ -37,5 +37,6 @@ public class Spel extends JFrame
         level.grid.setBounds(0, 50, 600, 600);
 
     }
-           
+          
+    
 }

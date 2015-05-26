@@ -11,14 +11,12 @@ package doolhof;
  * @author Danny
  */
 public interface Beweeg {
-    
-    
-    
+
     //public void move(Direction direction, Item speler);
     
     public enum Direction
     {
         Up, Down, Left, Right
     }
-    
+   
 }

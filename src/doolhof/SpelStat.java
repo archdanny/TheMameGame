@@ -43,7 +43,7 @@ public class SpelStat extends JPanel {
         public void actionPerformed(ActionEvent e) 
         {
 
-            level.grid.requestFocus();
+            level.starten();
         }
  }
     
@@ -52,8 +52,8 @@ public class SpelStat extends JPanel {
         @Override
         public void actionPerformed(ActionEvent e) 
         {
-
-             level.grid.readGrid();
+            level.herstarten();
+            
         }
  }
     

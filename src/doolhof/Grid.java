@@ -35,9 +35,31 @@ public class Grid extends JPanel
     
     public Grid()
     {
+       
+       
+        
+    }
+    
+    public void leegGrid()
+    {
+        for (int i = 0; i < 20; i++) 
+        {
+            for (int j = 0; j < 20; j++) 
+            {
+                
+                gridVeld[i][j].item = null;
+            }
+            
+        }
+    }
+    
+    public void makeGrid()
+    {
         setSize(frameHoogte, frameBreedte);
         setLayout(null);
+        speler = null;
         speler = new Speler();
+        
         add(speler);          
         speler.keys.speler = speler;
         addKeyListener(speler.keys);
@@ -45,11 +67,12 @@ public class Grid extends JPanel
         requestFocus();
         requestFocusInWindow(true);
         
+        
     }
     
     
     
-        public void makeGrid()
+        public void makeGridVelden()
     {
          gridVeld = new Veld[rows][colum];
         
@@ -96,12 +119,49 @@ public class Grid extends JPanel
             
             for (int j = 0; j < 20; j++) 
             {
+                
+                 if(mapArray[i].substring(j, j+1).equals("b"))
+                {
+                    Item b = new Muur(true);
+                    gridVeld[i][j].item = b;
+                    gridVeld[i][j].y = i;
+                    gridVeld[i][j].x = j;
+                    
+                    b.setBounds(Xposition, Yposition, boxSize, boxSize);
+                    add(b);
+                }
+                 
                 if(mapArray[i].substring(j, j+1).equals("w"))
                 {
                     Item m = new Muur();
                     gridVeld[i][j].item = m;
                     gridVeld[i][j].y = i;
                     gridVeld[i][j].x = j;
+                    gridVeld[i][j].grid = this;
+                    m.setBounds(Xposition, Yposition, boxSize, boxSize);
+                    add(m);
+                }
+                
+                 if(mapArray[i].substring(j, j+1).equals("h"))
+                {
+                    Item m = new Helper();
+                    gridVeld[i][j].item = m;
+                    gridVeld[i][j].y = i;
+                    gridVeld[i][j].x = j;
+                    gridVeld[i][j].grid = this;
+                    
+                    
+                    m.setBounds(Xposition, Yposition, boxSize, boxSize);
+                    add(m);
+                }
+                  if(mapArray[i].substring(j, j+1).equals("B"))
+                {
+                    Item m = new Bazooka();
+                    gridVeld[i][j].item = m;
+                    gridVeld[i][j].y = i;
+                    gridVeld[i][j].x = j;
+                    gridVeld[i][j].grid = this;
+                    
                     
                     m.setBounds(Xposition, Yposition, boxSize, boxSize);
                     add(m);
@@ -109,7 +169,7 @@ public class Grid extends JPanel
                  if(mapArray[i].substring(j, j+1).equals("g"))
                 {
                     gridVeld[i][j].item = null;
-                   
+                    gridVeld[i][j].grid = this;
                 
                 }
                  if(mapArray[i].substring(j, j+1).equals("s"))
@@ -121,6 +181,7 @@ public class Grid extends JPanel
                      speler.setBounds(speler.x, speler.y, boxSize, boxSize);
                       gridVeld[i][j].y = i;
                       gridVeld[i][j].x = j;
+                      gridVeld[i][j].grid = this;
                      speler.huidigeVeld = gridVeld[i][j];
                      
                  }
@@ -131,7 +192,7 @@ public class Grid extends JPanel
             Xposition = 0;
        }
        
-        speler.grid = this;
+       
     }
          
           

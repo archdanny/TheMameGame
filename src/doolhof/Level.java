@@ -22,8 +22,24 @@ public class Level
        spelstat.level = this;
        grid = new Grid();
        grid.makeGrid();
+       grid.makeGridVelden();
        grid.readGrid();
 
+    }
+    
+    public void starten()
+    {
+       grid.requestFocus();
+    }
+    
+    public void herstarten()
+    {
+        grid.leegGrid();
+        grid.removeAll();
+         grid.makeGridVelden();
+        grid.makeGrid();
+        grid.readGrid();
+        grid.repaint();
     }
     
 

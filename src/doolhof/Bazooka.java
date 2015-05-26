@@ -6,41 +6,28 @@
 
 package doolhof;
 
-import java.awt.Color;
 import java.awt.Graphics;
 import java.awt.Image;
-import javax.swing.DebugGraphics;
 import javax.swing.ImageIcon;
 
 /**
  *
  * @author Danny
  */
-public class Muur extends Item
-{
+public class Bazooka extends Item{
+    
      public Veld huidigeVeld;
      ImageIcon imageGet;
      Image image;
      private boolean breekbaar;
      int boxSize = 30;
     
-    public Muur()
+    public Bazooka()
     {
-      imageGet = new  ImageIcon(getClass().getClassLoader().getResource("Images/block.png"));
+      imageGet = new  ImageIcon(getClass().getClassLoader().getResource("Images/bazooka.png"));
       image = imageGet.getImage();
       breekbaar =true;
     }
-    
-      public Muur(boolean d)
-    {
-        if(d ==true)
-        {
-           breekbaar = false; 
-        }
-      imageGet = new  ImageIcon(getClass().getClassLoader().getResource("Images/block.png"));
-      image = imageGet.getImage();
-    }
-    
     
      @Override
      public void paintComponent(Graphics g) 
@@ -53,15 +40,5 @@ public class Muur extends Item
 
         }
      
-     public void destroy()
-     {
-          setBounds(0, 0, 20, 20);
-          repaint();
-     }
-     
-     public boolean getBreekbaar()
-     {
-         return breekbaar;
-     }
-             
+    
 }
