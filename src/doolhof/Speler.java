@@ -210,6 +210,34 @@ public class Speler extends Item implements Beweeg
              }
              
          }
+                  if(d == Down) 
+         {
+               if(huidigeVeld.Zuid.item instanceof Muur)
+             {
+                 Muur m = (Muur)huidigeVeld.Zuid.item;
+                 if(m.getBreekbaar() == true)
+                 {
+                 huidigeVeld.Zuid.item.setBounds(0, 0, 20, 20);
+                 huidigeVeld.Zuid.item.repaint();
+                 huidigeVeld.Zuid.item = null;
+                 }
+             }
+             
+         }
+              if(d == Up) 
+         {
+               if(huidigeVeld.Noord.item instanceof Muur)
+             {
+                 Muur m = (Muur)huidigeVeld.Noord.item;
+                 if(m.getBreekbaar() == true)
+                 {
+                 huidigeVeld.Noord.item.setBounds(0, 0, 20, 20);
+                 huidigeVeld.Noord.item.repaint();
+                 huidigeVeld.Noord.item = null;
+                 }
+             }
+             
+         }
      }
      
      
