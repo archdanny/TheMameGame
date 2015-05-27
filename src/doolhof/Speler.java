@@ -91,14 +91,13 @@ public class Speler extends Item implements Beweeg
      
      public void moveUp()
      {
-         int checkY = huidigeVeld.y -1;
-         boolean a = huidigeVeld.grid.gridVeld[checkY][huidigeVeld.x].item instanceof Muur;
+
+         boolean a = huidigeVeld.Noord.item instanceof Muur;
          if(!a)
          {
              
-            huidigeVeld.grid.gridVeld[huidigeVeld.y][huidigeVeld.x].item= null;
-            huidigeVeld.grid.gridVeld[checkY][huidigeVeld.x ].item = this;
-            
+
+             huidigeVeld =huidigeVeld.Noord;
             this.huidigeVeld.y = huidigeVeld.y -1;
             
             y = y -boxSize;
@@ -112,18 +111,19 @@ public class Speler extends Item implements Beweeg
      
      public void moveDown()
      {
-         int checkY = huidigeVeld.y +1;
-         boolean a = huidigeVeld.grid.gridVeld[checkY][huidigeVeld.x].item instanceof Muur;
+
+          boolean a = huidigeVeld.Zuid.item instanceof Muur;
          if(!a)
          {
-            huidigeVeld.grid.gridVeld[huidigeVeld.y][huidigeVeld.x].item= null;
-            huidigeVeld.grid.gridVeld[checkY][huidigeVeld.x ].item = this;
+
+              
+          huidigeVeld =huidigeVeld.Zuid;
 
             this.huidigeVeld.y = huidigeVeld.y +1;
             
           y = y + boxSize;
           setBounds(x, y , boxSize, boxSize);
-         
+
          }
           direction = Down;
           repaint();
@@ -131,12 +131,12 @@ public class Speler extends Item implements Beweeg
      }
      public void moveLeft()
      {
-          int checkX = huidigeVeld.x -1;
-         boolean a = huidigeVeld.grid.gridVeld[huidigeVeld.y][checkX].item instanceof Muur;
+
+          boolean a = huidigeVeld.West.item instanceof Muur;
          if(!a)
          {
-            huidigeVeld.grid.gridVeld[huidigeVeld.y][huidigeVeld.x].item= null;
-            huidigeVeld.grid.gridVeld[huidigeVeld.y][checkX ].item = this;
+
+             huidigeVeld =huidigeVeld.West;
              
             this.huidigeVeld.x = huidigeVeld.x -1;
             x = x - boxSize;
@@ -148,13 +148,12 @@ public class Speler extends Item implements Beweeg
      }
      public void moveRight()
      {
-          int checkX = huidigeVeld.x +1;
-         boolean a = huidigeVeld.grid.gridVeld[huidigeVeld.y][checkX].item instanceof Muur;
+
+         boolean a = huidigeVeld.Oost.item instanceof Muur;
          if(!a)
          {
-            huidigeVeld.grid.gridVeld[huidigeVeld.y][huidigeVeld.x].item= null;
-            huidigeVeld.grid.gridVeld[huidigeVeld.y][checkX ].item = this;
-            
+
+             huidigeVeld =huidigeVeld.Oost;
              this.huidigeVeld.x = huidigeVeld.x +1;
          x = x + boxSize;
         setBounds(x,y , boxSize, boxSize);
@@ -168,30 +167,29 @@ public class Speler extends Item implements Beweeg
      {
          if(d == Left) 
          {
-             int checkX = huidigeVeld.x -1;
-             if(huidigeVeld.grid.gridVeld[huidigeVeld.y][checkX].item instanceof Muur)
+            
+             if(huidigeVeld.West.item instanceof Muur)
              {
-                 Muur m = (Muur)huidigeVeld.grid.gridVeld[huidigeVeld.y][checkX].item;
+                 Muur m = (Muur)huidigeVeld.Oost.item;
                  if(m.getBreekbaar() == true)
                  {
-                 huidigeVeld.grid.gridVeld[huidigeVeld.y][checkX].item.setBounds(0, 0, 20, 20);
-                 huidigeVeld.grid.gridVeld[huidigeVeld.y][checkX].item.repaint();
-                 huidigeVeld.grid.gridVeld[huidigeVeld.y][checkX].item = null;
+                 huidigeVeld.West.item.setBounds(0, 0, 20, 20);
+                 huidigeVeld.West.item.repaint();
+                 huidigeVeld.West.item = null;
                  }
              }
              
          }
          if(d == Right) 
          {
-             int checkX = huidigeVeld.x +1;
-             if(huidigeVeld.grid.gridVeld[huidigeVeld.y][checkX].item instanceof Muur)
+               if(huidigeVeld.Oost.item instanceof Muur)
              {
-                  Muur m = (Muur)huidigeVeld.grid.gridVeld[huidigeVeld.y][checkX].item;
+                 Muur m = (Muur)huidigeVeld.Oost.item;
                  if(m.getBreekbaar() == true)
                  {
-                 huidigeVeld.grid.gridVeld[huidigeVeld.y][checkX].item.setBounds(0, 0, 20, 20);
-                 huidigeVeld.grid.gridVeld[huidigeVeld.y][checkX].item.repaint();
-                 huidigeVeld.grid.gridVeld[huidigeVeld.y][checkX].item = null;
+                 huidigeVeld.Oost.item.setBounds(0, 0, 20, 20);
+                 huidigeVeld.Oost.item.repaint();
+                 huidigeVeld.Oost.item = null;
                  }
              }
              
