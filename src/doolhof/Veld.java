@@ -15,7 +15,11 @@ public class Veld
     public int x;
     public int y;
     Item item;
-    Grid grid;
+    public Veld Noord;
+    public Veld Zuid;
+    public Veld West;
+    public Veld Oost;
+    
     
     public Veld()
             {
