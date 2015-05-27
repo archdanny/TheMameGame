@@ -186,7 +186,7 @@ public class Speler extends Item implements Beweeg
             
              if(huidigeVeld.West.item instanceof Muur)
              {
-                 Muur m = (Muur)huidigeVeld.Oost.item;
+                 Muur m = (Muur)huidigeVeld.West.item;
                  if(m.getBreekbaar() == true)
                  {
                  huidigeVeld.West.item.setBounds(0, 0, 20, 20);
