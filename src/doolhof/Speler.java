@@ -27,6 +27,7 @@ public class Speler extends Item implements Beweeg
     SpelerKey keys;
     public  int x;
     public  int y;
+    private Bazooka bazooka;
     
     ImageIcon imageGet;
     Image image;
@@ -96,7 +97,7 @@ public class Speler extends Item implements Beweeg
          if(!a)
          {
              
-
+             checkBazooka(huidigeVeld.Noord.item);
              huidigeVeld =huidigeVeld.Noord;
             this.huidigeVeld.y = huidigeVeld.y -1;
             
@@ -116,7 +117,7 @@ public class Speler extends Item implements Beweeg
          if(!a)
          {
 
-              
+             checkBazooka(huidigeVeld.Zuid.item);
           huidigeVeld =huidigeVeld.Zuid;
 
             this.huidigeVeld.y = huidigeVeld.y +1;
@@ -135,7 +136,7 @@ public class Speler extends Item implements Beweeg
           boolean a = huidigeVeld.West.item instanceof Muur;
          if(!a)
          {
-
+             checkBazooka(huidigeVeld.West.item);
              huidigeVeld =huidigeVeld.West;
              
             this.huidigeVeld.x = huidigeVeld.x -1;
@@ -150,18 +151,33 @@ public class Speler extends Item implements Beweeg
      {
 
          boolean a = huidigeVeld.Oost.item instanceof Muur;
+         
          if(!a)
          {
-
-             huidigeVeld =huidigeVeld.Oost;
-             this.huidigeVeld.x = huidigeVeld.x +1;
-         x = x + boxSize;
-        setBounds(x,y , boxSize, boxSize);
-          
+            checkBazooka(huidigeVeld.Oost.item);
+            huidigeVeld =huidigeVeld.Oost;
+            this.huidigeVeld.x = huidigeVeld.x +1;
+            x = x + boxSize;
+            setBounds(x,y , boxSize, boxSize);
          }
         direction = Right;
         repaint(); 
      }
+     
+     public void checkBazooka(Item item)
+     {
+         if(item instanceof Bazooka)
+         {
+             bazooka = (Bazooka) item;
+             imageGet = new  ImageIcon(getClass().getClassLoader().getResource("Images/playerBazooka.png"));
+                image = imageGet.getImage();
+                repaint();
+             item.setBounds(0, 0, 20, 20);
+             
+         }
+         
+     }
+     
      
      public void destroy(Direction d)
      {
