@@ -66,8 +66,7 @@ public class Grid extends JPanel
         setFocusable(true);
         requestFocus();
         requestFocusInWindow(true);
-        
-        
+
     }
     
     
@@ -83,10 +82,28 @@ public class Grid extends JPanel
                 Veld veld = new Veld();
                 gridVeld[i][j] = veld;
             }
-            
         }
         
     }
+        
+        public void IndVeld()
+        {
+             
+        for (int i = 1; i < 19; i++) 
+        {
+            for (int j = 1; j < 19; j++) 
+            {
+                
+                gridVeld[i][j].Noord = gridVeld[i-1][j];
+                gridVeld[i][j].Zuid = gridVeld[i+1][j];
+                gridVeld[i][j].West = gridVeld[i][j-1];
+                gridVeld[i][j].Oost = gridVeld[i][j+1];
+            }
+            
+        }
+        
+            
+        }
         
          public void readGrid()
         {
@@ -137,7 +154,7 @@ public class Grid extends JPanel
                     gridVeld[i][j].item = m;
                     gridVeld[i][j].y = i;
                     gridVeld[i][j].x = j;
-                    gridVeld[i][j].grid = this;
+                   
                     m.setBounds(Xposition, Yposition, boxSize, boxSize);
                     add(m);
                 }
@@ -148,7 +165,7 @@ public class Grid extends JPanel
                     gridVeld[i][j].item = m;
                     gridVeld[i][j].y = i;
                     gridVeld[i][j].x = j;
-                    gridVeld[i][j].grid = this;
+                
                     
                     
                     m.setBounds(Xposition, Yposition, boxSize, boxSize);
@@ -160,7 +177,7 @@ public class Grid extends JPanel
                     gridVeld[i][j].item = m;
                     gridVeld[i][j].y = i;
                     gridVeld[i][j].x = j;
-                    gridVeld[i][j].grid = this;
+            
                     
                     
                     m.setBounds(Xposition, Yposition, boxSize, boxSize);
@@ -169,7 +186,7 @@ public class Grid extends JPanel
                  if(mapArray[i].substring(j, j+1).equals("g"))
                 {
                     gridVeld[i][j].item = null;
-                    gridVeld[i][j].grid = this;
+                 
                 
                 }
                  if(mapArray[i].substring(j, j+1).equals("s"))
@@ -181,7 +198,7 @@ public class Grid extends JPanel
                      speler.setBounds(speler.x, speler.y, boxSize, boxSize);
                       gridVeld[i][j].y = i;
                       gridVeld[i][j].x = j;
-                      gridVeld[i][j].grid = this;
+                 
                      speler.huidigeVeld = gridVeld[i][j];
                      
                  }
