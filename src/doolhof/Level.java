@@ -24,6 +24,7 @@ public class Level
        grid.makeGrid();
        grid.makeGridVelden();
        grid.readGrid();
+       grid.IndVeld();
 
     }
     
@@ -36,9 +37,10 @@ public class Level
     {
         grid.leegGrid();
         grid.removeAll();
-         grid.makeGridVelden();
+        grid.makeGridVelden();
         grid.makeGrid();
         grid.readGrid();
+        grid.IndVeld();
         grid.repaint();
     }
     
