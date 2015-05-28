@@ -18,7 +18,7 @@ public class Doolhof {
     public static void main(String[] args) {
         Spel spel = new Spel();
         spel.makeComponents();
-        spel.setVisible(true);    
+        spel.setVisible(true);
     }
     
 }
