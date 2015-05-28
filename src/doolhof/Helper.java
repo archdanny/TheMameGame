@@ -6,10 +6,7 @@
 
 package doolhof;
 
-import static doolhof.Beweeg.Direction.Down;
-import static doolhof.Beweeg.Direction.Left;
-import static doolhof.Beweeg.Direction.Right;
-import static doolhof.Beweeg.Direction.Up;
+
 import java.awt.Color;
 import java.awt.Graphics;
 import java.awt.Graphics2D;

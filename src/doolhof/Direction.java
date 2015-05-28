@@ -10,10 +10,6 @@ package doolhof;
  *
  * @author Danny
  */
-public interface Beweeg {
-
-    public void move(Direction d);
-    
-
-   
+public enum Direction {
+    Up, Down, Left, Right
 }

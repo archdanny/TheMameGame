@@ -6,10 +6,11 @@
 
 package doolhof;
 
-import static doolhof.Beweeg.Direction.Down;
-import static doolhof.Beweeg.Direction.Left;
-import static doolhof.Beweeg.Direction.Right;
-import static doolhof.Beweeg.Direction.Up;
+
+import static doolhof.Direction.Down;
+import static doolhof.Direction.Left;
+import static doolhof.Direction.Right;
+import static doolhof.Direction.Up;
 import java.awt.event.KeyEvent;
 import java.awt.event.KeyListener;
 

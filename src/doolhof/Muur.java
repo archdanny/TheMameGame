@@ -47,9 +47,7 @@ public class Muur extends Item
         {
             
             super.paintComponent(g);
-               //g.setColor(Color.red);
-                //g.fillRect(0, 0 , 100, 100); 
-                g.drawImage(image, 0, 0, boxSize, boxSize, null, this);
+            g.drawImage(image, 0, 0, boxSize, boxSize, null, this);
 
         }
      
