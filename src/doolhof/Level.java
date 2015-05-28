@@ -13,8 +13,8 @@ package doolhof;
 public class Level 
 {
     private int score;
-    public Grid grid;
-    public SpelStat spelstat;
+    private Grid grid;
+    private SpelStat spelstat;
     
     public Level()
     {
@@ -37,12 +37,21 @@ public class Level
     {
         grid.leegGrid();
         grid.removeAll();
-        grid.makeGridVelden();
         grid.makeGrid();
+        grid.makeGridVelden();
         grid.readGrid();
         grid.IndVeld();
         grid.repaint();
     }
     
+    public SpelStat getSpelstat()
+    {
+        return spelstat;
+    }
+    
+    public Grid getGrid()
+    {
+        return grid;
+    }
 
 }

@@ -12,7 +12,7 @@ package doolhof;
  */
 public interface Beweeg {
 
-    //public void move(Direction direction, Item speler);
+    public void move(Direction d);
     
     public enum Direction
     {

@@ -19,8 +19,7 @@ public class Veld
     public Veld Zuid;
     public Veld West;
     public Veld Oost;
-    
-    
+
     public Veld()
             {
                 

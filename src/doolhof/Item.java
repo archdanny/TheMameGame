@@ -20,6 +20,7 @@ public abstract class Item extends JComponent
      public void paintComponent(Graphics g) 
         {
             super.paintComponent(g);
+            
         }
      
     public void Draw(Graphics g)

@@ -18,11 +18,11 @@ import javax.swing.ImageIcon;
  */
 public class Muur extends Item
 {
-     public Veld huidigeVeld;
-     ImageIcon imageGet;
-     Image image;
+     private Veld huidigeVeld;
+     private ImageIcon imageGet;
+     private Image image;
      private boolean breekbaar;
-     int boxSize = 30;
+     private int boxSize = 30;
     
     public Muur()
     {
@@ -55,8 +55,7 @@ public class Muur extends Item
      
      public void destroy()
      {
-          setBounds(0, 0, 20, 20);
-          repaint();
+          setVisible(false);  
      }
      
      public boolean getBreekbaar()

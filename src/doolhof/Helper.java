@@ -24,14 +24,14 @@ import javax.swing.ImageIcon;
  */
 public class Helper extends Item{
     
-    int boxSize = 30;
-    ImageIcon imageGet;
-     Image image;
-     TimerTask task;
-      Timer timer;
-      int translateX;
-      int translateY;
-      int rotation;
+    private int boxSize = 30;
+    private ImageIcon imageGet;
+    private Image image;
+    private TimerTask task;
+    private  Timer timer;
+    private int translateX;
+    private int translateY;
+    private int rotation;
       
     public Helper()
     {

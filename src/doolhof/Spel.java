@@ -31,10 +31,10 @@ public class Spel extends JFrame
     public void makeComponents()
     {
         level = new Level();
-        add(level.spelstat);
-        level.spelstat.setBounds(0, 0, 600, 50);
-        add(level.grid);
-        level.grid.setBounds(0, 50, 600, 600);
+        add(level.getSpelstat());
+        level.getSpelstat().setBounds(0, 0, 600, 50);
+        add(level.getGrid());
+        level.getGrid().setBounds(0, 50, 600, 600);
 
     }
           

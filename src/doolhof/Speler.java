@@ -23,23 +23,22 @@ import javax.swing.ImageIcon;
  */
 public class Speler extends Item implements Beweeg
 {
+    private Image image;
+    private Bazooka bazooka;
     public Veld huidigeVeld;
-    SpelerKey keys;
+    public SpelerKey keys;
     public  int x;
     public  int y;
-    private Bazooka bazooka;
+    private int boxSize = 30;
+    public Direction direction;
+    private int rotation;
     
-    ImageIcon imageGet;
-    Image image;
-    int boxSize = 30;
-     int rotation;
-     Direction direction;
-    
+
     public Speler()
     {
         keys = new SpelerKey();
-        imageGet = new  ImageIcon(getClass().getClassLoader().getResource("Images/player.png"));
-        image = imageGet.getImage();
+        image = new  ImageIcon(getClass().getClassLoader().getResource("Images/player.png")).getImage();
+ 
         direction = Down;
     }
     
@@ -48,19 +47,18 @@ public class Speler extends Item implements Beweeg
         {
             
             super.paintComponent(g);
-             //g.drawImage(image, 0, 0, boxSize, boxSize, null, this);
-             int translateX =0;
-             int translateY =0;
+            int translateX =0;
+            int translateY =0;
              
              if(direction == Up)
              {
-                 rotation = 180;
+                rotation = 180;
                 translateX =30;
                 translateY =30;
              }
                if(direction == Left)
              {
-                 rotation = 90;
+                rotation = 90;
                 translateX =30;
                 translateY =0;
              }
@@ -72,14 +70,14 @@ public class Speler extends Item implements Beweeg
              }
               if(direction == Down)
              {
-                 rotation = 0;
+                rotation = 0;
                 translateX =0;
                 translateY =0;
              }
              
-            Graphics2D g2d=(Graphics2D)g; // Create a Java2D version of g.
-            g2d.translate(translateX, translateY); // Translate the center of our coordinates.
-            g2d.rotate(Math.toRadians(rotation));  // Rotate the image by 1 radian.
+            Graphics2D g2d=(Graphics2D)g; 
+            g2d.translate(translateX, translateY); 
+            g2d.rotate(Math.toRadians(rotation)); 
             g2d.drawImage(image, 0, 0, boxSize, boxSize, null,this);
            
         }
@@ -90,108 +88,99 @@ public class Speler extends Item implements Beweeg
          paintComponent(g);
      }
      
-     public void moveUp()
+    @Override
+     public void move(Direction d)
      {
-
-         boolean a = huidigeVeld.Noord.item instanceof Muur;
-         if(!a)
+         if(d == Up)
          {
-             
-             checkBazooka(huidigeVeld.Noord.item);
-             huidigeVeld =huidigeVeld.Noord;
+         if(huidigeVeld.Noord.item instanceof Muur == false)
+            {
+            checkBazooka(huidigeVeld.Noord.item);
+            huidigeVeld =huidigeVeld.Noord;
             this.huidigeVeld.y = huidigeVeld.y -1;
-            
             y = y -boxSize;
             setBounds(x, y , boxSize, boxSize);
-            
-            
-         }
-         direction = Up;
+            }
+            direction = Up;
             repaint(); 
-     }
-     
-     public void moveDown()
-     {
-
-          boolean a = huidigeVeld.Zuid.item instanceof Muur;
-         if(!a)
+        }
+              if(d == Down)
          {
-
-             checkBazooka(huidigeVeld.Zuid.item);
-          huidigeVeld =huidigeVeld.Zuid;
-
+          
+         if(huidigeVeld.Zuid.item instanceof Muur == false)
+            {
+            checkBazooka(huidigeVeld.Zuid.item);
+            huidigeVeld =huidigeVeld.Zuid;
             this.huidigeVeld.y = huidigeVeld.y +1;
-            
-          y = y + boxSize;
-          setBounds(x, y , boxSize, boxSize);
-
-         }
+            y = y + boxSize;
+            setBounds(x, y , boxSize, boxSize);
+            }
           direction = Down;
           repaint();
-          
-     }
-     public void moveLeft()
-     {
-
-          boolean a = huidigeVeld.West.item instanceof Muur;
-         if(!a)
+        }
+                 if(d == Left)
          {
-             checkBazooka(huidigeVeld.West.item);
-             huidigeVeld =huidigeVeld.West;
-             
+         if(huidigeVeld.West.item instanceof Muur == false)
+            {
+            checkBazooka(huidigeVeld.West.item);
+            huidigeVeld =huidigeVeld.West;
             this.huidigeVeld.x = huidigeVeld.x -1;
             x = x - boxSize;
-            setBounds(x,y , boxSize, boxSize);
-              
-         }
-         direction = Left;
+            setBounds(x,y , boxSize, boxSize); 
+            }
+            direction = Left;
             repaint(); 
-     }
-     public void moveRight()
-     {
-
-         boolean a = huidigeVeld.Oost.item instanceof Muur;
-         
-         if(!a)
+        }
+                   if(d == Right)
          {
+         if(huidigeVeld.Oost.item instanceof Muur == false)
+            {
             checkBazooka(huidigeVeld.Oost.item);
             huidigeVeld =huidigeVeld.Oost;
             this.huidigeVeld.x = huidigeVeld.x +1;
             x = x + boxSize;
             setBounds(x,y , boxSize, boxSize);
-         }
-        direction = Right;
-        repaint(); 
+            }
+            direction = Right;
+            repaint(); 
+        }   
      }
-     
+
      public void checkBazooka(Item item)
      {
          if(item instanceof Bazooka)
          {
-             bazooka = (Bazooka) item;
-             imageGet = new  ImageIcon(getClass().getClassLoader().getResource("Images/playerBazooka.png"));
-                image = imageGet.getImage();
-                repaint();
-             item.setBounds(0, 0, 20, 20);
-             
+            bazooka = (Bazooka) item;
+            image = new  ImageIcon(getClass().getClassLoader().getResource("Images/playerBazooka.png")).getImage();
+            repaint();
+            item.setVisible(false);
          }
-         
+         if(bazooka == null)
+         {
+             image = new  ImageIcon(getClass().getClassLoader().getResource("Images/player.png")).getImage();
+
+         }
      }
      
+     public void resetSpeler()
+     {
+        bazooka = null;
+        image = new  ImageIcon(getClass().getClassLoader().getResource("Images/player.png")).getImage();  
+     }
      
      public void destroy(Direction d)
      {
+         if(bazooka != null)
+         {
          if(d == Left) 
          {
-            
              if(huidigeVeld.West.item instanceof Muur)
              {
                  Muur m = (Muur)huidigeVeld.West.item;
                  if(m.getBreekbaar() == true)
                  {
-                 huidigeVeld.West.item.setBounds(0, 0, 20, 20);
-                 huidigeVeld.West.item.repaint();
-                 huidigeVeld.West.item = null;
+                     m.destroy();
+                    huidigeVeld.West.item = null;
                  }
              }
              
@@ -203,9 +192,8 @@ public class Speler extends Item implements Beweeg
                  Muur m = (Muur)huidigeVeld.Oost.item;
                  if(m.getBreekbaar() == true)
                  {
-                 huidigeVeld.Oost.item.setBounds(0, 0, 20, 20);
-                 huidigeVeld.Oost.item.repaint();
-                 huidigeVeld.Oost.item = null;
+                    m.destroy();
+                    huidigeVeld.Oost.item = null;
                  }
              }
              
@@ -217,9 +205,8 @@ public class Speler extends Item implements Beweeg
                  Muur m = (Muur)huidigeVeld.Zuid.item;
                  if(m.getBreekbaar() == true)
                  {
-                 huidigeVeld.Zuid.item.setBounds(0, 0, 20, 20);
-                 huidigeVeld.Zuid.item.repaint();
-                 huidigeVeld.Zuid.item = null;
+                    m.destroy();
+                    huidigeVeld.Zuid.item = null;
                  }
              }
              
@@ -231,12 +218,12 @@ public class Speler extends Item implements Beweeg
                  Muur m = (Muur)huidigeVeld.Noord.item;
                  if(m.getBreekbaar() == true)
                  {
-                 huidigeVeld.Noord.item.setBounds(0, 0, 20, 20);
-                 huidigeVeld.Noord.item.repaint();
-                 huidigeVeld.Noord.item = null;
+                    m.destroy();
+                    huidigeVeld.Noord.item = null;
                  }
              }
              
+         }
          }
      }
      
