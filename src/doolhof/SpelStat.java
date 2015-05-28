@@ -19,13 +19,13 @@ import javax.swing.JLabel;
  */
 public class SpelStat extends JPanel {
 
-    JLabel label;
-    JButton startB;
-    JButton restartB;
-    Level level;
-    TimerTask task;
-    Timer timer;
-    Speler speler;
+    private JLabel label;
+    private JButton startB;
+    private JButton restartB;
+    public Level level;
+    private TimerTask task;
+    private Timer timer;
+    private Speler speler;
 
     public SpelStat() {
         setSize(400, 50);
@@ -58,6 +58,8 @@ public class SpelStat extends JPanel {
             
         }
     }
+    
+    
 
     public class ResetListener implements ActionListener {
 

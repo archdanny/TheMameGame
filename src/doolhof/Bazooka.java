@@ -16,11 +16,11 @@ import javax.swing.ImageIcon;
  */
 public class Bazooka extends Item{
     
-     public Veld huidigeVeld;
-     ImageIcon imageGet;
-     Image image;
+     private Veld huidigeVeld;
+     private ImageIcon imageGet;
+     private Image image;
      private boolean breekbaar;
-     int boxSize = 30;
+     private int boxSize = 30;
     
     public Bazooka()
     {

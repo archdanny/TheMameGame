@@ -6,6 +6,10 @@
 
 package doolhof;
 
+import static doolhof.Beweeg.Direction.Down;
+import static doolhof.Beweeg.Direction.Left;
+import static doolhof.Beweeg.Direction.Right;
+import static doolhof.Beweeg.Direction.Up;
 import java.awt.event.KeyEvent;
 import java.awt.event.KeyListener;
 
@@ -35,23 +39,23 @@ public class SpelerKey implements KeyListener {
             
             if(e.getKeyCode() == KeyEvent.VK_UP)
             {
-                 speler.moveUp();
+                 speler.move(Up);
             }
            
             
             if(e.getKeyCode() == KeyEvent.VK_DOWN)
                 {
-                speler.moveDown();
+                speler.move(Down);
                 }
                        
             if(e.getKeyCode() == KeyEvent.VK_LEFT)
              {
-                 speler.moveLeft();
+                 speler.move(Left);
             }
                         
             if(e.getKeyCode() == KeyEvent.VK_RIGHT)
              {
-                speler.moveRight();
+                speler.move(Right);
             }
              if(e.getKeyCode() == KeyEvent.VK_SPACE)
             {
