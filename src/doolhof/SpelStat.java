@@ -10,8 +10,8 @@ import java.awt.event.ActionListener;
 import java.util.Timer;
 import java.util.TimerTask;
 import javax.swing.JButton;
-import javax.swing.JPanel;
 import javax.swing.JLabel;
+import javax.swing.JPanel;
 
 /**
  *
@@ -23,7 +23,7 @@ public class SpelStat extends JPanel {
     private JButton startB;
     private JButton restartB;
     public Level level;
-    private TimerTask task;
+    public Task task;
     private Timer timer;
     private Speler speler;
 
@@ -43,6 +43,7 @@ public class SpelStat extends JPanel {
         label = new JLabel("60");
         add(label);
         label.setBounds(250, 10, 100, 30);
+        task = new Task();
     }
 
     public class ResetListnenr implements ActionListener {
@@ -52,7 +53,7 @@ public class SpelStat extends JPanel {
 
             startB.setEnabled(false);
             level.starten();
-            task = new Task();
+            
             timer = new Timer();
             timer.schedule(task, 1000, 1000);
             
@@ -70,6 +71,7 @@ public class SpelStat extends JPanel {
             timer.cancel();
             label.setText("60");
             requestFocus();
+            
 
         }
     }

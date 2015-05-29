@@ -25,6 +25,7 @@ public class Speler extends Item implements Beweeg
 {
     private Image image;
     private Bazooka bazooka;
+    private Cheater cheater;
     public Veld huidigeVeld;
     public SpelerKey keys;
     public  int x;
@@ -110,6 +111,7 @@ public class Speler extends Item implements Beweeg
          if(huidigeVeld.Zuid.item instanceof Muur == false)
             {
             checkBazooka(huidigeVeld.Zuid.item);
+            checkBCheater(huidigeVeld.Zuid.item);
             huidigeVeld =huidigeVeld.Zuid;
             this.huidigeVeld.y = huidigeVeld.y +1;
             y = y + boxSize;
@@ -151,6 +153,7 @@ public class Speler extends Item implements Beweeg
          if(item instanceof Bazooka)
          {
             bazooka = (Bazooka) item;
+            
             image = new  ImageIcon(getClass().getClassLoader().getResource("Images/playerBazooka.png")).getImage();
             repaint();
             item.setVisible(false);
@@ -159,6 +162,18 @@ public class Speler extends Item implements Beweeg
          {
              image = new  ImageIcon(getClass().getClassLoader().getResource("Images/player.png")).getImage();
 
+         }
+     }
+     
+      public void checkBCheater(Item item)
+     {
+         if(item instanceof Cheater)
+         {
+     
+            cheater = (Cheater) item;
+            cheater.cheat();          
+            repaint();
+            item.setVisible(false);
          }
      }
      

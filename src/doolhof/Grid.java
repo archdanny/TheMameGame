@@ -32,6 +32,7 @@ public class Grid extends JPanel
     private int colum = 20;
     private Veld gridVeld [][];
     private Speler speler;
+    public Level level;
     
     public Grid()
     {
@@ -157,6 +158,17 @@ public class Grid extends JPanel
                 {
                     gridVeld[i][j].item = null;
                 }
+                  if(mapArray[i].substring(j, j+1).equals("c"))
+                {
+                    Cheater cheater = new Cheater();
+                   
+                    gridVeld[i][j].item = cheater;
+                    gridVeld[i][j].y = i;
+                    gridVeld[i][j].x = j;
+                    cheater.setBounds(Xposition, Yposition, boxSize, boxSize);
+                    add(cheater);
+//                    cheater.task = level.getSpelstat().task;
+                }
                  if(mapArray[i].substring(j, j+1).equals("s"))
                  {
                     gridVeld[i][j].item = speler;
@@ -178,9 +190,9 @@ public class Grid extends JPanel
          
           public void leegGrid()
     {
-        for (int i = 0; i < 20; i++) 
+        for (int i = 1; i < 19; i++) 
         {
-            for (int j = 0; j < 20; j++) 
+            for (int j = 1; j < 19; j++) 
             { 
                 gridVeld[i][j].item = null;
             }
