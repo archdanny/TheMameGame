@@ -11,9 +11,11 @@ import java.awt.Color;
 import java.awt.Graphics;
 import java.awt.Graphics2D;
 import java.awt.Image;
+import java.util.ArrayList;
 import java.util.Timer;
 import java.util.TimerTask;
 import javax.swing.ImageIcon;
+import javax.swing.JPanel;
 
 /**
  *
@@ -29,8 +31,9 @@ public class Helper extends Item{
     private int translateX;
     private int translateY;
     private int rotation;
+    public Grid grid;
       
-    public Helper()
+    public Helper(Grid gridGet)
     {
       imageGet = new  ImageIcon(getClass().getClassLoader().getResource("Images/diamond.png"));
       image = imageGet.getImage();
@@ -38,7 +41,7 @@ public class Helper extends Item{
         timer = new Timer();
         rotation=90;
         timer.schedule(task, 0, 200);
-       
+       grid = gridGet;
     }
     
      @Override
@@ -107,6 +110,16 @@ public class Helper extends Item{
         }
     
      }
+     
+     public void GetLocation(Veld veld, JPanel panel)
+     {
+   
+     }
+     
+     
+     
+     
+     
 }
     
 

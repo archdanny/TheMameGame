@@ -13,7 +13,5 @@ package doolhof;
 public interface Beweeg {
 
     public void move(Direction d);
-    
 
-   
 }

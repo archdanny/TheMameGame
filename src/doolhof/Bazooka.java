@@ -9,6 +9,7 @@ package doolhof;
 import java.awt.Graphics;
 import java.awt.Image;
 import javax.swing.ImageIcon;
+import javax.swing.JPanel;
 
 /**
  *
@@ -16,7 +17,7 @@ import javax.swing.ImageIcon;
  */
 public class Bazooka extends Item{
     
-     private Veld huidigeVeld;
+     public Veld huidigeVeld;
      private ImageIcon imageGet;
      private Image image;
      private boolean breekbaar;
@@ -37,6 +38,12 @@ public class Bazooka extends Item{
             g.drawImage(image, 0, 0, boxSize, boxSize, null, this);
 
         }
+     
+     public void afschieten(Direction d, Veld veld,int x,int y, JPanel panel)
+     {
+         Raket shoot = new Raket(d,veld, x, y,panel);
+        
+     }
      
     
 }

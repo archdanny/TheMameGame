@@ -12,14 +12,12 @@ import static doolhof.Direction.Down;
 import static doolhof.Direction.Left;
 import static doolhof.Direction.Right;
 import static doolhof.Direction.Up;
-import java.awt.Color;
+import java.awt.Container;
 import java.awt.Graphics;
 import java.awt.Graphics2D;
 import java.awt.Image;
-import java.awt.geom.AffineTransform;
-import java.awt.image.AffineTransformOp;
-import java.awt.image.BufferedImage;
 import javax.swing.ImageIcon;
+import javax.swing.JPanel;
 
 /**
  *
@@ -42,7 +40,6 @@ public class Speler extends Item implements Beweeg
     {
         keys = new SpelerKey();
         image = new  ImageIcon(getClass().getClassLoader().getResource("Images/player.png")).getImage();
- 
         direction = Down;
     }
     
@@ -100,6 +97,8 @@ public class Speler extends Item implements Beweeg
          if(huidigeVeld.Noord.item instanceof Muur == false)
             {
             checkBazooka(huidigeVeld.Noord.item);
+            checkVriend(huidigeVeld.Noord.item);
+            checkHelper(huidigeVeld.Noord);
             huidigeVeld =huidigeVeld.Noord;
             this.huidigeVeld.y = huidigeVeld.y -1;
             y = y -boxSize;
@@ -114,6 +113,8 @@ public class Speler extends Item implements Beweeg
          if(huidigeVeld.Zuid.item instanceof Muur == false)
             {
             checkBazooka(huidigeVeld.Zuid.item);
+            checkVriend(huidigeVeld.Zuid.item);
+            checkHelper(huidigeVeld.Zuid);
             huidigeVeld =huidigeVeld.Zuid;
             this.huidigeVeld.y = huidigeVeld.y +1;
             y = y + boxSize;
@@ -127,6 +128,8 @@ public class Speler extends Item implements Beweeg
          if(huidigeVeld.West.item instanceof Muur == false)
             {
             checkBazooka(huidigeVeld.West.item);
+            checkVriend(huidigeVeld.West.item);
+            checkHelper(huidigeVeld.West);
             huidigeVeld =huidigeVeld.West;
             this.huidigeVeld.x = huidigeVeld.x -1;
             x = x - boxSize;
@@ -140,6 +143,8 @@ public class Speler extends Item implements Beweeg
          if(huidigeVeld.Oost.item instanceof Muur == false)
             {
             checkBazooka(huidigeVeld.Oost.item);
+            checkVriend(huidigeVeld.Oost.item);
+            checkHelper(huidigeVeld.Oost);
             huidigeVeld =huidigeVeld.Oost;
             this.huidigeVeld.x = huidigeVeld.x +1;
             x = x + boxSize;
@@ -149,12 +154,35 @@ public class Speler extends Item implements Beweeg
             repaint(); 
         }   
      }
-
+     
+     public void checkVriend(Item item)
+     {
+         if(item instanceof Vriend)
+         {
+           Container panelContainer = this.getParent();
+            JPanel panel = (JPanel)panelContainer;
+            panel.setVisible(false);
+         }
+     }
+     
+       public void checkHelper(Veld veld)
+     {
+         if(veld.item instanceof Helper)
+         {
+            Container panelContainer = this.getParent();
+            JPanel panel = (JPanel)panelContainer;
+             Helper help = (Helper) veld.item;
+             help.GetLocation(veld, panel);
+             help.setVisible(false);
+         }
+     }
+     
      public void checkBazooka(Item item)
      {
          if(item instanceof Bazooka)
          {
             bazooka = (Bazooka) item;
+            bazooka.huidigeVeld = huidigeVeld;
             image = new  ImageIcon(getClass().getClassLoader().getResource("Images/playerBazooka.png")).getImage();
             repaint();
             item.setVisible(false);
@@ -172,62 +200,14 @@ public class Speler extends Item implements Beweeg
         image = new  ImageIcon(getClass().getClassLoader().getResource("Images/player.png")).getImage();  
      }
      
-     public void destroy(Direction d)
+     public void destroy()
      {
+         Container panelContainer = this.getParent();
+         JPanel panel = (JPanel)panelContainer;
          if(bazooka != null)
          {
-         if(d == Left) 
-         {
-             if(huidigeVeld.West.item instanceof Muur)
-             {
-                 Muur m = (Muur)huidigeVeld.West.item;
-                 if(m.getBreekbaar() == true)
-                 {
-                     m.destroy();
-                    huidigeVeld.West.item = null;
-                 }
-             }
-             
-         }
-         if(d == Right) 
-         {
-               if(huidigeVeld.Oost.item instanceof Muur)
-             {
-                 Muur m = (Muur)huidigeVeld.Oost.item;
-                 if(m.getBreekbaar() == true)
-                 {
-                    m.destroy();
-                    huidigeVeld.Oost.item = null;
-                 }
-             }
-             
-         }
-                  if(d == Down) 
-         {
-               if(huidigeVeld.Zuid.item instanceof Muur)
-             {
-                 Muur m = (Muur)huidigeVeld.Zuid.item;
-                 if(m.getBreekbaar() == true)
-                 {
-                    m.destroy();
-                    huidigeVeld.Zuid.item = null;
-                 }
-             }
-             
-         }
-              if(d == Up) 
-         {
-               if(huidigeVeld.Noord.item instanceof Muur)
-             {
-                 Muur m = (Muur)huidigeVeld.Noord.item;
-                 if(m.getBreekbaar() == true)
-                 {
-                    m.destroy();
-                    huidigeVeld.Noord.item = null;
-                 }
-             }
-             
-         }
+            bazooka.afschieten(direction, huidigeVeld,x,y,panel);
+
          }
      }
      
