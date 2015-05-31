@@ -30,7 +30,7 @@ public class Grid extends JPanel
     private int boxSize = frameHoogte/20;
     private int rows = 20;
     private int colum = 20;
-    private Veld gridVeld [][];
+    public Veld gridVeld [][];
     private Speler speler;
     public Level level;
     
@@ -138,12 +138,22 @@ public class Grid extends JPanel
                 
                  if(mapArray[i].substring(j, j+1).equals("h"))
                 {
-                    Item help = new Helper();
+                    Item help = new Helper(this);
+                    
                     gridVeld[i][j].item = help;
                     gridVeld[i][j].y = i;
                     gridVeld[i][j].x = j;
                     help.setBounds(Xposition, Yposition, boxSize, boxSize);
                     add(help);
+                }
+                  if(mapArray[i].substring(j, j+1).equals("v"))
+                {
+                    Item vriend = new Vriend();
+                    gridVeld[i][j].item = vriend;
+                    gridVeld[i][j].y = i;
+                    gridVeld[i][j].x = j;
+                    vriend.setBounds(Xposition, Yposition, boxSize, boxSize);
+                    add(vriend);
                 }
                   if(mapArray[i].substring(j, j+1).equals("B"))
                 {
