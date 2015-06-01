@@ -53,10 +53,10 @@ public class SpelStat extends JPanel {
 
             startB.setEnabled(false);
             level.starten();
-            
+           
             timer = new Timer();
             timer.schedule(task, 1000, 1000);
-            
+         
         }
     }
     

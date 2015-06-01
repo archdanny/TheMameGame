@@ -35,12 +35,12 @@ public class Level
     }
     
     public void herstarten()
-    {
+    {      
 //        grid.leegGrid();
         grid.removeAll();
         grid.makeGrid();
         grid.makeGridVelden();
-        grid.readGrid();
+        grid.readGrid();       
         grid.IndVeld();
         grid.repaint();
     }

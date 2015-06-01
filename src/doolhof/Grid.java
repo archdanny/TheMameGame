@@ -171,9 +171,9 @@ public class Grid extends JPanel
                   if(mapArray[i].substring(j, j+1).equals("c"))
                 {
                     Cheater cheater = new Cheater();
-                   
+                   cheater.task = level.getSpelstat().task;
                     gridVeld[i][j].item = cheater;
-                    cheater.task = level.getSpelstat().task;
+                    
                     gridVeld[i][j].y = i;
                     gridVeld[i][j].x = j;
                     cheater.setBounds(Xposition, Yposition, boxSize, boxSize);
