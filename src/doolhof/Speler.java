@@ -114,12 +114,12 @@ public class Speler extends Item implements Beweeg
          if(huidigeVeld.Zuid.item instanceof Muur == false)
             {
             checkBazooka(huidigeVeld.Zuid.item);
-<<<<<<< HEAD
+
             checkBCheater(huidigeVeld.Zuid.item);
-=======
+
             checkVriend(huidigeVeld.Zuid.item);
             checkHelper(huidigeVeld.Zuid);
->>>>>>> origin/master
+
             huidigeVeld =huidigeVeld.Zuid;
             this.huidigeVeld.y = huidigeVeld.y +1;
             y = y + boxSize;
@@ -187,11 +187,9 @@ public class Speler extends Item implements Beweeg
          if(item instanceof Bazooka)
          {
             bazooka = (Bazooka) item;
-<<<<<<< HEAD
-            
-=======
+
             bazooka.huidigeVeld = huidigeVeld;
->>>>>>> origin/master
+
             image = new  ImageIcon(getClass().getClassLoader().getResource("Images/playerBazooka.png")).getImage();
             repaint();
             item.setVisible(false);

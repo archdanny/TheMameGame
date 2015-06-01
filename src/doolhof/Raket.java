@@ -144,7 +144,7 @@ public class Raket extends Item {
                 panel.add(this);
                 task = new Task();
                 timer = new Timer();
-                timer.schedule(task, 0, 500);
+                timer.schedule(task, 0, 50);
          }    
     }
     
