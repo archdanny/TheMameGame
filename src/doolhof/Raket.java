@@ -15,6 +15,7 @@ import java.awt.Container;
 import java.awt.Graphics;
 import java.awt.Graphics2D;
 import java.awt.Image;
+import java.util.HashMap;
 import java.util.Timer;
 import java.util.TimerTask;
 import javax.swing.ImageIcon;
@@ -36,9 +37,11 @@ public class Raket extends Item {
     int y;
     private TimerTask task;
     private  Timer timer;
+  
     
     public Raket(Direction d,Veld veld , int x,int y, JPanel panel)
     {
+        
         image = new  ImageIcon(getClass().getClassLoader().getResource("Images/raket.png")).getImage();
         huidigeVeld = veld;
         this.x = x;
@@ -92,24 +95,9 @@ public class Raket extends Item {
      
      private Veld getVeldDirection()
      {
-         Veld veld = null;
-            if(direction == Up)
-             {
-                 veld = huidigeVeld.Noord;
-             }
-               if(direction == Left)
-             {
-                 veld = huidigeVeld.West;
-             }
-              if(direction == Right)
-             {
-                 veld = huidigeVeld.Oost;
-             }
-              if(direction == Down)
-             {
-                 veld = huidigeVeld.Zuid;
-             }
-             return veld;
+            Veld veld;
+            veld = huidigeVeld.veldHash.get(direction);
+            return veld;
      }
      
      private void move()
