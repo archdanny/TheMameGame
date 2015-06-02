@@ -6,6 +6,8 @@
 
 package doolhof;
 
+import java.util.HashMap;
+
 /**
  *
  * @author Danny
@@ -19,11 +21,18 @@ public class Veld
     public Veld Zuid;
     public Veld West;
     public Veld Oost;
-
-    public Veld()
-            {
-                
-            }
+    HashMap<Direction, Veld> veldHash;
     
+    public Veld()
+        {
+            veldHash = new HashMap<>();
+        }
+    public void filHash()
+    {
+            veldHash.put(Direction.Up, this.Noord);
+            veldHash.put(Direction.Down, this.Zuid);  
+            veldHash.put(Direction.Left, this.West);  
+            veldHash.put(Direction.Right, this.Oost); 
+    }
     
 }
